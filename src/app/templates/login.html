@@ -1,0 +1,15 @@
+<div style="color:blue">Please login</div>
+
+<div style="color:red">{{message}}</div>
+
+<form class="jumbotron" name="loginform" #lform="ngForm" (ngSubmit)="login(lform)">
+
+<label id="use">Username</label>
+<input class="form-control" type="text" id="use" name="username" [(ngModel)]="username" required #user="ngModel">
+<br>
+<label id="pas">Password</label>
+<input class="form-control" type="password" id="pas" name="password" [(ngModel)]="password" required #pass="ngModel">
+<br>
+<input type="submit" [disabled]="lform.invalid" value="login">
+</form>
+

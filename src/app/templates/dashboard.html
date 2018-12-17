@@ -1,0 +1,21 @@
+<h3>{{currentuser}} Welcome to your Dashboard</h3><div>{{myviews}}</div>
+<p style="text-align:right">
+    <a href="javascript:void(0)" routerLink="/logout">Logout</a>
+    
+</p>
+
+<a href="javascript:void(0)" routerLink="/dashboard/myprofile">Posts</a> 
+<br>
+I agree<input type="checkbox" name="agreed" [(ngModel)]="agreed" #choice="ngModel" required>
+
+<div>{{errormessage}}</div>
+
+<div id="details">
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+
+<router-outlet></router-outlet>

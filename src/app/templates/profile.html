@@ -1,0 +1,10 @@
+
+<a href="javascript:void(0)" (click)="getPosts()">View All your Posts</a>
+
+<div id="myposts" *ngFor="let x of myposts[0]">
+<p>{{x.title}}</p>
+<p>{{x.body}}</p>
+<button class="btn btn-primary" (click)="like(x.id)">Like</button>{{x.likes}}
+<button class="btn btn-primary" (click)="unlike(x.id)">Unlike</button>{{x.unlikes}}
+<hr>
+</div>
