@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpModule} from '@angular/http';
+import {ReactiveFormsModule} from '@angular/forms';
 
 import {IndexComponent} from './components/IndexComponent';
 import {LoginComponent} from './components/LoginComponent';
@@ -18,6 +19,7 @@ import {LoginService} from './services/LoginService';
 import {ActivateService} from './services/ActivateService';
 import {DeactivateService} from './services/DeactivateService';
 import {ProfileService} from './services/ProfileService';
+import {ReactiveComponent} from './components/ReactiveComponent';
 
 const routes:Routes=[
 
@@ -34,6 +36,8 @@ children:[
 {path:'myprofile',component:Profile}
 
 ]},
+
+{path:'reactive',component:ReactiveComponent},
 {path:'logout',component:LogoutComponent},
 /**The above canActivate ensures that each time the Dashboard path is activated, there
  * is a check if a user is logged in or not before activating this route.
@@ -42,15 +46,15 @@ children:[
  * selected,else it doesnt allow to leave the route.
  */
 {path:'404',component:SomethingWrong},
-{path:'**',component:ErrorPage},
+{path:'**',component:ErrorPage}
 
 
 ]
 
 //Defines the metadata for the AppModule which is the root module of the app.
 @NgModule({
-  imports:      [BrowserModule,FormsModule,HttpModule,RouterModule.forRoot(routes)],
-  declarations: [IndexComponent,LoginComponent,DashboardComponent,Profile,ErrorPage,LogoutComponent,SomethingWrong],
+  imports:      [BrowserModule,FormsModule,HttpModule,RouterModule.forRoot(routes),ReactiveFormsModule],
+  declarations: [IndexComponent,LoginComponent,DashboardComponent,Profile,ReactiveComponent,ErrorPage,LogoutComponent,SomethingWrong],
   bootstrap:    [IndexComponent],
   providers: [LoginService,ActivateService,DeactivateService,ProfileService] 
 })

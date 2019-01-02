@@ -31,6 +31,9 @@ var LoginService = (function () {
     LoginService.prototype.getVisits = function () {
         return localStorage.getItem("visits");
     };
+    LoginService.prototype.setImage = function (path) {
+        localStorage.setItem("path", path);
+    };
     LoginService.prototype.getUser = function () {
         return localStorage.getItem('logged');
     };
@@ -60,6 +63,14 @@ var LoginService = (function () {
             }
             return res.json().result;
         });
+    };
+    LoginService.prototype.upload = function (fileupload) {
+        var formdata = new FormData();
+        for (var i = 0; i < fileupload.length; i++) {
+            formdata.append("uploads", fileupload[i], fileupload[i].name);
+        }
+        return this.http.post(this.url + 'upload', formdata).
+            map(function (res) { return res.json(); });
     };
     return LoginService;
 }());

@@ -14,9 +14,12 @@ var DashboardComponent = (function () {
     function DashboardComponent(logserv) {
         this.logserv = logserv;
         this.currentuser = "";
+        this.imagepath = "";
         this.agreed = false;
         this.errormessage = "";
         this.myviews = "";
+        this.fileUpload = [];
+        this.uploadstatus = "";
     }
     DashboardComponent.prototype.IsChecked = function () {
         return this.agreed;
@@ -25,6 +28,7 @@ var DashboardComponent = (function () {
         console.log("getting user");
         this.currentuser = localStorage.getItem("logged");
         this.myviews = localStorage.getItem("visits");
+        this.imagepath = localStorage.getItem("path");
         //We are writing an ajax call so that the data can be retrieved every time the
         //page(component) is refreshed
         var xhttp = new XMLHttpRequest();
@@ -45,6 +49,36 @@ var DashboardComponent = (function () {
         };
         xhttp.open('GET', 'http://localhost:8080/getDetails/' + this.currentuser, true);
         xhttp.send();
+    };
+    DashboardComponent.prototype.open = function () {
+        document.getElementById("profile_image").click();
+    };
+    DashboardComponent.prototype.StoreFile = function (input) {
+        this.fileUpload = input.target.files;
+        console.log(this.fileUpload);
+        var reader = new FileReader();
+        reader.readAsDataURL(input.target.files[0]);
+        reader.onload = function () {
+            var out = document.getElementById("output");
+            out.src = reader.result;
+        };
+    };
+    DashboardComponent.prototype.upload = function () {
+        var _this = this;
+        var filename = "";
+        var myprofile = document.getElementById('profile_image'); //we are casting it with <HTMLInputElement> to avoid
+        //error: Cannot access property files on HtmlElement
+        for (var i = 0; i < myprofile.files.length; i++) {
+            console.log(myprofile.files[i].name);
+        }
+        this.logserv.upload(this.fileUpload).subscribe(function (data) {
+            console.log(data);
+            filename = data.message;
+        }, function (err) {
+            console.log(err);
+        }, function () {
+            _this.uploadstatus = filename;
+        });
     };
     return DashboardComponent;
 }());

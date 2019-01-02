@@ -1,8 +1,15 @@
-<h3>{{currentuser}} Welcome to your Dashboard</h3><div>{{myviews}}</div>
+<img src="app/images/dashboard.png" style="width:100px;height:100px">
+<h3>{{currentuser}} Welcome to your Dashboard</h3><!--<div>{{myviews}}</div>-->
 <p style="text-align:right">
     <a href="javascript:void(0)" routerLink="/logout">Logout</a>
-    
 </p>
+<form name="uploadform" #upform="ngForm" enctype="multipart/form-data">
+<input style="display:none;" type="file" id="profile_image" accept="image/*" (change)="StoreFile($event)" name="myimage" [(ngModel)]="myimage" required #myimag="ngModel">
+<img id="output" style="width:100px;height:100px" (click)="open()" alt="Edit Photo" src="http://localhost:8080/uploads/{{currentuser}}/{{imagepath}}">
+<button (click)="upload()" type="button" class="btn btn-primary">Upload</button>
+</form>
+
+<div *ngIf="uploadstatus.length > 0" style="color:red">{{uploadstatus}} has been uploaded</div>
 
 <a href="javascript:void(0)" routerLink="/dashboard/myprofile">Posts</a> 
 <br>

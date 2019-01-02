@@ -31,10 +31,12 @@ var LoginComponent = (function () {
     LoginComponent.prototype.login = function (form) {
         var _this = this;
         var check = false;
+        var filestatus = "";
         var message = "";
         this.serv.login(form.form.controls.username._value, form.form.controls.password._value)
             .subscribe(function (data) {
             check = data.result;
+            filestatus = data.filestatus;
             message = data.message;
         }, function (err) {
             console.log(err);
@@ -43,6 +45,9 @@ var LoginComponent = (function () {
                 console.log("Entered check loop");
                 _this.serv.setUser(form.form.controls.username._value);
                 _this.serv.setVisits(message);
+                if (filestatus !== "" && filestatus !== undefined && filestatus !== null) {
+                    _this.serv.setImage(filestatus);
+                }
                 _this.router.navigate(['/dashboard']);
             }
             else {

@@ -1,0 +1,21 @@
+<form name="reactiveform" (ngSubmit)="submit(myForm)" [formGroup]="myForm">
+
+<!--Alphabet validation -->
+<input type="text" formControlName="myname">
+<span *ngIf="myForm.get('myname').hasError('required')&& myForm.get('myname').touched">Name needed</span>
+<span *ngIf="myForm.get('myname').hasError('maxlength') && myForm.get('myname').touched">Maximum 5 characters</span>
+<span *ngIf="myForm.get('myname').hasError('pattern') && myForm.get('myname').touched">Only alphabets</span>
+
+<!--Email validation -->
+<input type="email" formControlName="myemail" email="true">
+<span *ngIf="(myForm.get('myemail').hasError('required') || myForm.get('myemail').hasError('email')) && myForm.get('myemail').touched">Invalid email-id</span>
+
+<!--Number validation -->
+<input type="text" formControlName="mypin">
+<span *ngIf="myForm.get('mypin').hasError('maxlength')">Only 6 digits</span>
+<span *ngIf="myForm.get('mypin').hasError('required') && myForm.get('mypin').touched">Pincode needed</span>
+<span *ngIf="myForm.get('mypin').hasError('pattern') && myForm.get('mypin').touched">Only digits</span>
+
+<input type="submit" value="submit" [disabled]="myForm.invalid">
+
+</form>

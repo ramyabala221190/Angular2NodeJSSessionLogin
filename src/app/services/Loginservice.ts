@@ -32,6 +32,11 @@ getVisits()
     return localStorage.getItem("visits");
 }
 
+setImage(path:string)
+{
+localStorage.setItem("path",path);
+}
+
 getUser()
 {
     return localStorage.getItem('logged');
@@ -66,12 +71,26 @@ console.log(res.json());
 if(res.json().result==false) //session no longer exists
 {  
 localStorage.removeItem("logged");//removing from localstorage
+localStorage.removeItem("visits");
+localStorage.removeItem("path");
 this.router.navigate(['/login']); //navigate to login page
  //dont navigate to the route
 }
 return res.json().result;
 });
     
+}
+
+upload(fileupload:Array<File>)
+{
+    var formdata:any=new FormData();
+    for(var i=0;i<fileupload.length;i++)
+    {
+formdata.append("uploads",fileupload[i], fileupload[i].name)
+    }
+
+    return this.http.post(this.url+'upload',formdata).
+    map((res:Response)=>res.json());
 }
 
 }

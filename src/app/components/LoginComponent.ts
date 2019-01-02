@@ -27,6 +27,7 @@ ngOninit()
 login(form:any)
 {
     var check:boolean=false;
+    var filestatus:string="";
     var message:string="";
 
 this.serv.login(form.form.controls.username._value,form.form.controls.password._value)
@@ -34,6 +35,7 @@ this.serv.login(form.form.controls.username._value,form.form.controls.password._
     data=>{
         
         check=data.result;
+        filestatus=data.filestatus;
         message=data.message;
     },
     err=>{
@@ -46,6 +48,10 @@ this.serv.login(form.form.controls.username._value,form.form.controls.password._
             console.log("Entered check loop");
           this.serv.setUser(form.form.controls.username._value); 
           this.serv.setVisits(message);
+          if(filestatus !=="" && filestatus !==undefined && filestatus !==null)
+          {
+          this.serv.setImage(filestatus);
+          }
           this.router.navigate(['/dashboard']);
           //Here again ActivateService will be called because dashboard route
 //is getting activated.But we have already checked if the user is logged in or not so

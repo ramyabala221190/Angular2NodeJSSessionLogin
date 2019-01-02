@@ -14,6 +14,8 @@ constructor(private logservice:LoginService){}
 ngOnInit()
 {
 localStorage.removeItem("logged");
+localStorage.removeItem("visits");
+localStorage.removeItem("path");
 //Now the value of logged will be null
 
 this.logservice.logout().subscribe(

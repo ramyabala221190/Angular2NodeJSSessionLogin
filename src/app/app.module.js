@@ -11,6 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
+var forms_2 = require("@angular/forms");
 var IndexComponent_1 = require("./components/IndexComponent");
 var LoginComponent_1 = require("./components/LoginComponent");
 var DashboardComponent_1 = require("./components/DashboardComponent");
@@ -22,6 +23,7 @@ var LoginService_1 = require("./services/LoginService");
 var ActivateService_1 = require("./services/ActivateService");
 var DeactivateService_1 = require("./services/DeactivateService");
 var ProfileService_1 = require("./services/ProfileService");
+var ReactiveComponent_1 = require("./components/ReactiveComponent");
 var routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login',
@@ -32,6 +34,7 @@ var routes = [
         children: [
             { path: 'myprofile', component: ProfileComponent_1.Profile }
         ] },
+    { path: 'reactive', component: ReactiveComponent_1.ReactiveComponent },
     { path: 'logout', component: LogoutComponent_1.LogoutComponent },
     /**The above canActivate ensures that each time the Dashboard path is activated, there
      * is a check if a user is logged in or not before activating this route.
@@ -40,7 +43,7 @@ var routes = [
      * selected,else it doesnt allow to leave the route.
      */
     { path: '404', component: SomethingWrong_1.SomethingWrong },
-    { path: '**', component: ErrorPage_1.ErrorPage },
+    { path: '**', component: ErrorPage_1.ErrorPage }
 ];
 //Defines the metadata for the AppModule which is the root module of the app.
 var AppModule = (function () {
@@ -50,8 +53,8 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(routes)],
-        declarations: [IndexComponent_1.IndexComponent, LoginComponent_1.LoginComponent, DashboardComponent_1.DashboardComponent, ProfileComponent_1.Profile, ErrorPage_1.ErrorPage, LogoutComponent_1.LogoutComponent, SomethingWrong_1.SomethingWrong],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, router_1.RouterModule.forRoot(routes), forms_2.ReactiveFormsModule],
+        declarations: [IndexComponent_1.IndexComponent, LoginComponent_1.LoginComponent, DashboardComponent_1.DashboardComponent, ProfileComponent_1.Profile, ReactiveComponent_1.ReactiveComponent, ErrorPage_1.ErrorPage, LogoutComponent_1.LogoutComponent, SomethingWrong_1.SomethingWrong],
         bootstrap: [IndexComponent_1.IndexComponent],
         providers: [LoginService_1.LoginService, ActivateService_1.ActivateService, DeactivateService_1.DeactivateService, ProfileService_1.ProfileService]
     })
